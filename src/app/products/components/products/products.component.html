@@ -1,0 +1,69 @@
+<h2 class="text-center">Product list</h2>
+
+<div *ngIf="!(loading$ | async); else loading" class="container">
+  <div class="row">
+    <div class="col-6">
+      <div class="product-list">
+        <div class="table-container">
+          <table
+            class="table table-bordered table-primary table-striped"
+            *ngIf="products$ | async as products">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+              [class.selected]="isProductSelected(product.ProductId)"
+              *ngFor="let product of products; let index = index;"
+              (click)="selectProduct(product)"
+            >
+              <td>{{index + 1}}</td>
+              <td>{{product.Name}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="product-details" *ngIf="selectedProduct; else notSelectedProductMessage">
+        <div class="table-container">
+          <table class="table table-bordered table-primary table-striped">
+            <thead>
+            <tr>
+              <th>Prop Name</th>
+              <th>Prop Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let entry of selectedProductProps">
+              <td>{{entry.propName}}</td>
+              <td>{{entry.propValue ?? 'it\'s unknown'}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="text-end">
+          <button class="btn btn-primary" (click)="resetProduct()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #notSelectedProductMessage>
+  <p class="text-center">No product selected. To see product details select the product</p>
+</ng-template>
+
+<ng-template #loading>
+  <div class="loading-container">
+    <div class="spinner-border text-secondary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</ng-template>
+
+

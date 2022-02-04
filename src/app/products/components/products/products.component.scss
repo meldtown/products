@@ -1,0 +1,36 @@
+.table-container {
+  max-height: 100vh;
+  overflow: auto;
+}
+
+.loading-container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(black, .2);
+
+  .spinner-border {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.product-list {
+  tbody tr {
+    cursor: pointer;
+
+    &:hover, &.selected {
+      outline: 1px solid black;
+    }
+  }
+}
+
+thead {
+  position: sticky;
+  top: 0;
+}
